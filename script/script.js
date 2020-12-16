@@ -70,19 +70,18 @@ window.addEventListener('DOMContentLoaded', () => {
     const popUp = document.querySelector('.popup'),
       popUpBtn = document.querySelectorAll('.popup-btn'),
       popUpClose = document.querySelector('.popup-close'),
-      popUpContent = popUp.querySelector('.popup-content'),
-      width = document.documentElement.clientWidth;
+      popUpContent = popUp.querySelector('.popup-content');
 
-    let count = -400;
+    let count = -10;
 
     function popUpAnimate() {
-      if (width > 768) {
-        count += 10;
-        popUpContent.style.left = count + 'px';
-        if (count < width / 2 - popUpContent.offsetWidth / 2) {
+      if (document.documentElement.clientWidth > 768) {
+        count++;
+        popUpContent.style.left = `${count}%`;
+        if (count < 40) {
           setTimeout(popUpAnimate, 10);
         } else {
-          count = -400;
+          count = -10;
           clearTimeout(popUpAnimate);
         }
       }
