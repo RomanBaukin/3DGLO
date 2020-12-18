@@ -155,4 +155,15 @@ window.addEventListener('DOMContentLoaded', () => {
   };
 
   tabs();
+
+  // Слайдер
+
+  const slider = () => {
+    const slide = document.querySelectorAll('.portofolio=item'),
+      btn = document.querySelectorAll('.portfolio-btn'),
+      dot = document.querySelectorAll('.dot'),
+      slider = document.querySelectorAll('.portfolio-content');
+  };
+
+  slider();
 });
