@@ -39,7 +39,7 @@ window.addEventListener('DOMContentLoaded', () => {
         timerSeconds.textContent = '00';
       }
     }
-
+    updateClock();
     setInterval(updateClock, 1000);
   }
 
@@ -47,19 +47,30 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // Меню
   const toggleMenu = () => {
-    const btnMenu = document.querySelector('.menu'),
-      menu = document.querySelector('menu');
+    const menu = document.querySelector('menu');
 
     const handlerMenu = () => {
       menu.classList.toggle('active-menu');
     };
 
-    btnMenu.addEventListener('click', handlerMenu);
+    document.addEventListener('click', (event) => {
+      let target = event.target;
 
-    menu.addEventListener('click', (event) => {
-      const target = event.target;
-
-      if (target.classList.contains('close-btn') || target.matches('a')) handlerMenu();
+      if (
+        target.matches('.menu') ||
+        target.matches('.menu>img') ||
+        target.matches('.menu>small') ||
+        target.matches('.active-menu a')
+      ) {
+        handlerMenu();
+      } else {
+        target = target.closest('.active-menu');
+        if (!target && menu.classList.contains('active-menu')) {
+          handlerMenu();
+        } else {
+          return;
+        }
+      }
     });
   };
 
@@ -74,22 +85,22 @@ window.addEventListener('DOMContentLoaded', () => {
     let count = -10;
 
     function popUpAnimate() {
-      if (document.documentElement.clientWidth > 768) {
-        count++;
-        popUpContent.style.left = `${count}%`;
-        if (count < 40) {
-          setTimeout(popUpAnimate, 10);
-        } else {
-          count = -10;
-          clearTimeout(popUpAnimate);
-        }
+      count++;
+      popUpContent.style.left = `${count}%`;
+      if (count < 40) {
+        setTimeout(popUpAnimate, 10);
+      } else {
+        count = -10;
+        clearTimeout(popUpAnimate);
       }
     }
 
     popUpBtn.forEach((elem) => {
       elem.addEventListener('click', () => {
-        popUpAnimate();
         popUp.style.display = 'block';
+        if (document.documentElement.clientWidth > 768) {
+          popUpAnimate();
+        }
       });
     });
 
