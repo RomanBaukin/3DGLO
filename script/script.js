@@ -82,25 +82,27 @@ window.addEventListener('DOMContentLoaded', () => {
       popUpBtn = document.querySelectorAll('.popup-btn'),
       popUpContent = popUp.querySelector('.popup-content');
 
-    let count = -10;
+    let count = 0;
 
     function popUpAnimate() {
-      count++;
-      popUpContent.style.left = `${count}%`;
-      if (count < 40) {
-        setTimeout(popUpAnimate, 10);
+      if (document.documentElement.clientWidth > 768) {
+        count++;
+        popUpContent.style.transform = `translateY(${count}%)`;
+        if (count < 30) {
+          setTimeout(popUpAnimate, 10);
+        } else {
+          count = 0;
+          clearTimeout(popUpAnimate);
+        }
       } else {
-        count = -10;
-        clearTimeout(popUpAnimate);
+        popUpContent.style.transform = `translateY(0)`;
       }
     }
 
     popUpBtn.forEach((elem) => {
       elem.addEventListener('click', () => {
         popUp.style.display = 'block';
-        if (document.documentElement.clientWidth > 768) {
-          popUpAnimate();
-        }
+        popUpAnimate();
       });
     });
 
