@@ -56,12 +56,7 @@ window.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('click', (event) => {
       let target = event.target;
 
-      if (
-        target.matches('.menu') ||
-        target.matches('.menu>img') ||
-        target.matches('.menu>small') ||
-        target.matches('.active-menu a')
-      ) {
+      if (target.matches('.menu, .menu>img, .menu>small, .active-menu a')) {
         handlerMenu();
       } else {
         target = target.closest('.active-menu');
