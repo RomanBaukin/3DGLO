@@ -256,4 +256,38 @@ window.addEventListener('DOMContentLoaded', () => {
   };
 
   slider();
+
+  //Меняем фото при наведении
+
+  const changeFoto = () => {
+    const img = document.querySelectorAll('.command__photo');
+    let src;
+
+    img.forEach((item) => {
+      item.addEventListener('mouseenter', (event) => {
+        src = event.target.src;
+        event.target.src = event.target.dataset.img;
+      });
+
+      item.addEventListener('mouseleave', (event) => {
+        event.target.src = src;
+      });
+    });
+  };
+
+  changeFoto();
+
+  // Калькулятор
+
+  const calculator = () => {
+    const input = document.querySelectorAll('input.calc-item');
+
+    input.forEach((item) => {
+      item.addEventListener('input', () => {
+        item.value = item.value.replace(/\D/g, '');
+      });
+    });
+  };
+
+  calculator();
 });
