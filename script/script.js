@@ -315,7 +315,23 @@ window.addEventListener('DOMContentLoaded', () => {
         total = price * typeValue * squareValue * countValue * dayValue;
       }
 
-      totalValue.textContent = total;
+      function outTotal() {
+        const step = 50;
+        let n = 0;
+
+        const output = Math.round(1000 / (total / step));
+
+        const interval = setInterval(() => {
+          n += step;
+          if (n === total) {
+            clearInterval(interval);
+          }
+          if (total) {
+            totalValue.textContent = n;
+          }
+        }, output);
+      }
+      outTotal();
     };
 
     calcBlock.addEventListener('change', (event) => {
