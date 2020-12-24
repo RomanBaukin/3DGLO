@@ -363,4 +363,124 @@ window.addEventListener('DOMContentLoaded', () => {
   };
 
   calculator(100);
+
+  //send-ajax-form
+
+  const sendForm = () => {
+    const errorMessage = 'Что то пошло не так...',
+      loadMessage = 'Загрузка...',
+      successMessage = 'Спасибо! Мы скоро с вами свяжемся';
+
+    const form = document.querySelectorAll('form'),
+      input = document.querySelectorAll('form input');
+
+    const statusMessage = document.createElement('div');
+    statusMessage.style.cssText = 'font-size: 2rem;';
+
+    input.forEach((item) => {
+      item.addEventListener('input', (event) => {
+        const target = event.target;
+
+        if (target.matches('.form-name, .mess, #form2-name')) {
+          target.value = target.value.replace(/[^а-яё\s]/gi, '');
+        }
+      });
+    });
+
+    form.forEach((item) => {
+      item.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const target = event.target;
+
+        if (target.matches('#form1, #form2, #form3')) {
+          target.appendChild(statusMessage);
+          statusMessage.textContent = loadMessage;
+          const formData = new FormData(target);
+          const body = {};
+
+          formData.forEach((val, key) => {
+            body[key] = val;
+          });
+          postData(
+            body,
+            () => {
+              input.forEach((item) => {
+                item.value = '';
+              });
+              statusMessage.textContent = successMessage;
+              const statusMessageRemove = () => {
+                target.removeChild(statusMessage);
+              };
+
+              setTimeout(statusMessageRemove, 5000);
+            },
+            (error) => {
+              statusMessage.textContent = errorMessage;
+              console.error(error);
+            }
+          );
+        }
+      });
+    });
+
+    const postData = (body, outputData, errorData) => {
+      const request = new XMLHttpRequest();
+      request.addEventListener('readystatechange', () => {
+        if (request.readyState !== 4) {
+          return;
+        }
+
+        if (request.status === 200) {
+          outputData();
+        } else {
+          errorData(request.status);
+        }
+      });
+      request.open('POST', './server.php');
+      request.setRequestHeader('Content-Type', 'application/json');
+
+      request.send(JSON.stringify(body));
+    };
+  };
+
+  sendForm();
+
+  //Маска для телефонов
+
+  const maskPhone = (selector, masked = '+7 (___) ___-__-__') => {
+    const elems = document.querySelectorAll(selector);
+
+    function mask(event) {
+      const keyCode = event.keyCode;
+      const template = masked,
+        def = template.replace(/\D/g, ''),
+        val = this.value.replace(/\D/g, '');
+
+      let i = 0,
+        newValue = template.replace(/[_\d]/g, (a) => (i < val.length ? val.charAt(i++) || def.charAt(i) : a));
+      i = newValue.indexOf('_');
+      if (i !== -1) {
+        newValue = newValue.slice(0, i);
+      }
+      let reg = template
+        .substr(0, this.value.length)
+        .replace(/_+/g, (a) => '\\d{1,' + a.length + '}')
+        .replace(/[+()]/g, '\\$&');
+      reg = new RegExp('^' + reg + '$');
+      if (!reg.test(this.value) || this.value.length < 5 || (keyCode > 47 && keyCode < 58)) {
+        this.value = newValue;
+      }
+      if (event.type === 'blur' && this.value.length < 5) {
+        this.value = '';
+      }
+    }
+
+    for (const elem of elems) {
+      elem.addEventListener('input', mask);
+      elem.addEventListener('focus', mask);
+      elem.addEventListener('blur', mask);
+    }
+  };
+
+  maskPhone('.form-phone');
 });
