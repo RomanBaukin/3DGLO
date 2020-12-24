@@ -315,23 +315,37 @@ window.addEventListener('DOMContentLoaded', () => {
         total = price * typeValue * squareValue * countValue * dayValue;
       }
 
-      function outTotal() {
-        const step = 50;
-        let n = 0;
+      function animate({ timing, draw, duration }) {
+        const start = performance.now();
 
-        const output = Math.round(1000 / (total / step));
+        requestAnimationFrame(function animate(time) {
+          // timeFraction изменяется от 0 до 1
+          let timeFraction = (time - start) / duration;
+          if (timeFraction > 1) timeFraction = 1;
 
-        const interval = setInterval(() => {
-          n += step;
-          if (n === total) {
-            clearInterval(interval);
+          // вычисление текущего состояния анимации
+          const progress = timing(timeFraction);
+
+          draw(progress); // отрисовать её
+
+          if (timeFraction < 1) {
+            requestAnimationFrame(animate);
           }
-          if (total) {
-            totalValue.textContent = n;
-          }
-        }, output);
+        });
       }
-      outTotal();
+
+      animate({
+        //скорость анимации
+        duration: 1000,
+        //функция расчета времени
+        timing(timeFraction) {
+          return timeFraction;
+        },
+        //функция отрисовки
+        draw(progress) {
+          totalValue.textContent = Math.floor(progress * total);
+        },
+      });
     };
 
     calcBlock.addEventListener('change', (event) => {
