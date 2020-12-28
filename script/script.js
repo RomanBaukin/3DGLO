@@ -368,9 +368,19 @@ window.addEventListener('DOMContentLoaded', () => {
 
   const sendForm = () => {
     const errorMessage = 'Что то пошло не так...',
-      loadMessage = `<div class="loadingio-spinner-blocks-eshrbad6nd" style="margin-top: 20px;"><div class="ldio-ettmtdppwza">
-        <div style='left:-3px;top:-3px;animation-delay:0s'></div><div style='left:33px;top:-3px;animation-delay:0.125s'></div><div style='left:69px;top:-3px;animation-delay:0.25s'></div><div style='left:-3px;top:33px;animation-delay:0.875s'></div><div style='left:69px;top:33px;animation-delay:0.375s'></div><div style='left:-3px;top:69px;animation-delay:0.75s'></div><div style='left:33px;top:69px;animation-delay:0.625s'></div><div style='left:69px;top:69px;animation-delay:0.5s'></div>
-        </div></div>
+      loadMessage = `
+      <div class="loadingio-spinner-blocks-eshrbad6nd" style="margin-top: 20px;">
+        <div class="ldio-ettmtdppwza">
+          <div style='left:-3px;top:-3px;animation-delay:0s'></div>
+          <div style='left:33px;top:-3px;animation-delay:0.125s'></div>
+          <div style='left:69px;top:-3px;animation-delay:0.25s'></div>
+          <div style='left:-3px;top:33px;animation-delay:0.875s'></div>
+          <div style='left:69px;top:33px;animation-delay:0.375s'></div>
+          <div style='left:-3px;top:69px;animation-delay:0.75s'></div>
+          <div style='left:33px;top:69px;animation-delay:0.625s'></div>
+          <div style='left:69px;top:69px;animation-delay:0.5s'></div>
+        </div>
+      </div>
         <style type="text/css">
         @keyframes ldio-ettmtdppwza {
           0% { background: #f2f8f9 }
