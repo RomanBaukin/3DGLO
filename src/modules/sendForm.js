@@ -59,8 +59,12 @@ const sendForm = () => {
     item.addEventListener('input', (event) => {
       const target = event.target;
 
-      if (target.matches('.form-name, .mess, #form2-name')) {
+      if (target.matches('.form-name, #form2-name')) {
         target.value = target.value.replace(/[^а-яё\s]/gi, '');
+      }
+
+      if (target.matches('.mess')) {
+        target.value = target.value.replace(/[^а-яё\.,!?]/gi, '');
       }
     });
   });
