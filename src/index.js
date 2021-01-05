@@ -9,6 +9,7 @@ import changeFoto from './modules/changeFoto';
 import calculator from './modules/calculator';
 import sendForm from './modules/sendForm';
 import maskPhone from './modules/maskPhone';
+import smoothScrolling from './modules/smoothScroll';
 
 // Таймер
 countTimer('11 jan 2021');
@@ -36,3 +37,6 @@ sendForm();
 
 //Маска для телефонов
 maskPhone('.form-phone');
+
+//Плавный скролл
+smoothScrolling();
