@@ -51,6 +51,9 @@ html {
 img {
   max-width: 100%;
 }
+input {
+  box-shadow: none;
+}
 body {
   font-family: Roboto, sans-serif;
   font-weight: 400;
