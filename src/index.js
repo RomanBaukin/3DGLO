@@ -10,6 +10,7 @@ import calculator from './modules/calculator';
 import sendForm from './modules/sendForm';
 import maskPhone from './modules/maskPhone';
 import smoothScrolling from './modules/smoothScroll';
+import validator from './modules/validator';
 
 // Таймер
 countTimer('11 jan 2021');
@@ -40,3 +41,6 @@ maskPhone('.form-phone');
 
 //Плавный скролл
 smoothScrolling();
+
+//Валидатор
+validator();

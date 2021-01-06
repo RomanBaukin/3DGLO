@@ -64,7 +64,7 @@ const sendForm = () => {
       }
 
       if (target.matches('.mess')) {
-        target.value = target.value.replace(/[^а-яё\.,!?]/gi, '');
+        target.value = target.value.replace(/[^а-яё\.,!?\s]/gi, '');
       }
     });
   });
