@@ -1,7 +1,6 @@
 /gulpfile.js
 /node_modules
 /package-lock.json
-/package.json
 /.eslintrc
 webpack.dev.config.js
 webpack.prod.config.js

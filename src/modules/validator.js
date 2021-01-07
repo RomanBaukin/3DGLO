@@ -2,7 +2,7 @@
 
 const validator = () => {
   const inputsValid = document.querySelectorAll('input'),
-    buttons = document.querySelectorAll('button[type = submit]');
+    buttons = document.querySelectorAll('button[type=submit]');
 
   inputsValid.forEach((elem) => {
     elem.addEventListener('input', () => {
